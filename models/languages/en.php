@@ -13,6 +13,7 @@ $lang = array();
 //Account
 $lang = array_merge($lang,array(
 	"ACCOUNT_SPECIFY_USERNAME" 		=> "Please enter your username",
+	"ACCOUNT_SPECIFY_DISPLAYNAME" 		=> "Please enter your display name",
 	"ACCOUNT_SPECIFY_PASSWORD" 		=> "Please enter your password",
 	"ACCOUNT_SPECIFY_EMAIL"			=> "Please enter your email address",
 	"ACCOUNT_INVALID_EMAIL"			=> "Invalid email address",
@@ -26,6 +27,7 @@ $lang = array_merge($lang,array(
 	"ACCOUNT_PASS_CHAR_LIMIT"		=> "Your password must be between %m1% and %m2% characters in length",
 	"ACCOUNT_TITLE_CHAR_LIMIT"		=> "Titles must be between %m1% and %m2% characters in length",
 	"ACCOUNT_PASS_MISMATCH"			=> "Your password and confirmation password must match",
+	"ACCOUNT_DISPLAY_ENTER"		=> "Please enter display name",
 	"ACCOUNT_DISPLAY_INVALID_CHARACTERS"	=> "Display name can only include alpha-numeric characters",
 	"ACCOUNT_USERNAME_IN_USE"		=> "Username %m1% is already in use",
 	"ACCOUNT_DISPLAYNAME_IN_USE"		=> "Display name %m1% is already in use",
@@ -35,6 +37,7 @@ $lang = array_merge($lang,array(
 	"ACCOUNT_SPECIFY_NEW_PASSWORD"		=> "Please enter your new password",	
 	"ACCOUNT_SPECIFY_CONFIRM_PASSWORD"	=> "Please confirm your new password",
 	"ACCOUNT_NEW_PASSWORD_LENGTH"		=> "New password must be between %m1% and %m2% characters in length",	
+	"ACCOUNT_PASS_REENTER"			=> "Please re-enter password",
 	"ACCOUNT_PASSWORD_INVALID"		=> "Current password doesn't match the one we have on record",	
 	"ACCOUNT_DETAILS_UPDATED"		=> "Account details updated",
 	"ACCOUNT_ACTIVATION_MESSAGE"		=> "You will need to activate your account before you can login. Please follow the link below to activate your account. \n\n
@@ -92,7 +95,8 @@ $lang = array_merge($lang,array(
 
 //Miscellaneous
 $lang = array_merge($lang,array(
-	"CAPTCHA_FAIL"				=> "Failed security question",
+	"CAPTCHA_FAIL"				=> "Failed to validate captcha",
+	"CAPTCHA_ENTER"			=> "Enter captcha",
 	"CONFIRM"				=> "Confirm",
 	"DENY"					=> "Deny",
 	"SUCCESS"				=> "Success",

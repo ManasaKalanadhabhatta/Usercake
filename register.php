@@ -14,50 +14,90 @@ if(isUserLoggedIn()) { header("Location: account.php"); die(); }
 if(!empty($_POST))
 {
 	$errors = array();
-	$email = trim($_POST["email"]);
-	$username = trim($_POST["username"]);
-	$displayname = trim($_POST["displayname"]);
-	$password = trim($_POST["password"]);
-	$confirm_pass = trim($_POST["passwordc"]);
+	
 	$reCaptcha = new ReCaptcha($secretKey);
-	
 	// Was there a reCAPTCHA response?
-	if ($_POST["g-recaptcha-response"]) {
+	if (isset($_POST["g-recaptcha-response"]) and !empty($_POST["g-recaptcha-response"]))
+	{
 	    $resp = $reCaptcha->verifyResponse(
-	        $_SERVER["REMOTE_ADDR"],
-	        $_POST["g-recaptcha-response"]
+			$_SERVER["REMOTE_ADDR"],
+			$_POST["g-recaptcha-response"]
 	    );
+		if (!($resp != null && $resp->success)) {
+			$errors[] = lang("CAPTCHA_FAIL");
 	}
-
-	if (!($resp != null && $resp->success)) {
-    	$errors[] = lang("CAPTCHA_FAIL");
+	}
+	else
+	{
+			$errors[] = lang("CAPTCHA_ENTER");
 	}
 	
-	if(minMaxRange(5,25,$username))
+	if(isset($_POST["username"]) and  !empty($_POST["username"]))
 	{
-		$errors[] = lang("ACCOUNT_USER_CHAR_LIMIT",array(5,25));
+		$username = trim($_POST["username"]);
+		if(minMaxRange(5,25,$username))
+		{
+			$errors[] = lang("ACCOUNT_USER_CHAR_LIMIT",array(5,25));
+		}
+		if(!ctype_alnum($username)){
+			$errors[] = lang("ACCOUNT_USER_INVALID_CHARACTERS");
+		}
 	}
-	if(!ctype_alnum($username)){
-		$errors[] = lang("ACCOUNT_USER_INVALID_CHARACTERS");
+	else
+	{
+		$errors[] = lang("ACCOUNT_SPECIFY_USERNAME");
 	}
-	if(minMaxRange(5,25,$displayname))
+	
+	if(minMaxRange(5,25,$_POST["displayname"]))
 	{
 		$errors[] = lang("ACCOUNT_DISPLAY_CHAR_LIMIT",array(5,25));
 	}
-	if(!ctype_alnum($displayname)){
-		$errors[] = lang("ACCOUNT_DISPLAY_INVALID_CHARACTERS");
-	}
-	if(minMaxRange(8,50,$password) && minMaxRange(8,50,$confirm_pass))
+	if(isset($_POST["displayname"]) and !empty($_POST["displayname"]))
 	{
-		$errors[] = lang("ACCOUNT_PASS_CHAR_LIMIT",array(8,50));
+		$displayname = trim($_POST["displayname"]);
+		if(!ctype_alnum($displayname)){
+			$errors[] = lang("ACCOUNT_DISPLAY_INVALID_CHARACTERS");
+		}
 	}
-	else if($password != $confirm_pass)
+	else
 	{
-		$errors[] = lang("ACCOUNT_PASS_MISMATCH");
+		$errors[] = lang("ACCOUNT_SPECIFY_DISPLAYNAME");
 	}
-	if(!isValidEmail($email))
+	if(isset($_POST["password"]) and !empty($_POST["password"]))
 	{
-		$errors[] = lang("ACCOUNT_INVALID_EMAIL");
+		$password = trim($_POST["password"]);
+	}
+	else
+	{
+		$errors[] = lang("ACCOUNT_SPECIFY_PASSWORD");
+	}
+	if(isset($_POST["passwordc"]) and !empty($_POST["passwordc"]))
+	{
+		$confirm_pass = trim($_POST["passwordc"]);
+		if(minMaxRange(8,50,$password) && minMaxRange(8,50,$confirm_pass))
+		{
+			$errors[] = lang("ACCOUNT_PASS_CHAR_LIMIT",array(8,50));
+		}
+		else if($password != $confirm_pass)
+		{
+			$errors[] = lang("ACCOUNT_PASS_MISMATCH");
+		}
+	}
+	else
+	{
+		$errors[] = lang("ACCOUNT_PASS_REENTER");
+	}
+	if(isset($_POST["email"]) and !empty($_POST["email"]))
+	{
+		$email = trim($_POST["email"]);
+		if(!isValidEmail($email))
+		{
+			$errors[] = lang("ACCOUNT_INVALID_EMAIL");
+		}
+	}
+	else
+	{
+		$errors[] = lang("ACCOUNT_SPECIFY_EMAIL");
 	}
 	//End data validation
 	if(count($errors) == 0)

@@ -27,6 +27,10 @@ if(!empty($_POST))
 			$errors[] = lang("ACCOUNT_SPECIFY_EMAIL");
 		}
 	}
+	else
+	{
+		$errors[] = lang("ACCOUNT_EMAIL_ENTER");
+	}
 
 	if(isset($_POST["password"])){
 		$password = trim($_POST["password"]);
@@ -34,6 +38,10 @@ if(!empty($_POST))
 		{
 			$errors[] = lang("ACCOUNT_SPECIFY_PASSWORD");
 		}
+	}
+	else
+	{
+		$errors[] = lang("ACCOUNT_SPECIFY_PASSWORD");
 	}
 
 
