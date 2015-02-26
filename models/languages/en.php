@@ -107,6 +107,10 @@ $lang = array_merge($lang,array(
 	"PAGE_PRIVATE_TOGGLED"			=> "This page is now %m1%",
 	"PAGE_ACCESS_REMOVED"			=> "Page access removed for %m1% permission level(s)",
 	"PAGE_ACCESS_ADDED"			=> "Page access added for %m1% permission level(s)",
+	"FILE_TYPE_NOT_ALLOWED"		=> "File type not allowed",
+	"FILE_SIZE_LARGE"			=> "File size is too large",
+	"PROFILE_PICTURE_CHANGED"	=> "Profile picture changed successfully",
+	"PROFILE_PICTURE_ERROR"		=> "Unable to change profile picture",
 	));
 
 //Permissions
